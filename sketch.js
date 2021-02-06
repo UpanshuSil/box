@@ -2,6 +2,7 @@ var canvas;
 var music;
 var rect1,rect2,rect3,rect4;
 var square;
+var edges;
 
 function preload(){
     music = loadSound("music.mp3");
@@ -22,35 +23,49 @@ function setup(){
     
     square=createSprite(random(60,450));
     square.shapeColor=("white");
-square.velocityY=2;
-square.velocityX=2;
+square.velocityY=4;
+square.velocityX=4;
 
-    
+edges=createEdgeSprites(); 
 
 }
 
 function draw() {
     background("orange");
-    createEdgeSprites();
     
-    square.bou
+   
+    
     
    //add condition to check if box touching surface and make it box
 
    if(rect1.isTouching(square) && square.bounceOff(rect1)){
        square.shapeColor=("red");
+       
    }
    
    if(rect2.isTouching(square) && square.bounceOff(rect2)){
     square.shapeColor=("blue");
+    music.play();
 }
 if(rect3.isTouching(square) && square.bounceOff(rect3)){
     square.shapeColor=("green");
+    
 }
 if(rect4.isTouching(square) && square.bounceOff(rect4)){
     square.shapeColor=("purple");
+    music.play();
 }
- 
-    drawSprites();
-    
+
+if(square.isTouching(rect2)){
+  square.shapeColor=("blue")
+    square.velocityX=0;
+    square.velocityY=0;
+    music.stop();
+}
+
+square.bounceOff(edges); 
+
+drawSprites();
+
+
 }
