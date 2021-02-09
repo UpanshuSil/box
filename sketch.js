@@ -1,11 +1,11 @@
 var canvas;
-var music;
+var music1;
 var rect1,rect2,rect3,rect4;
 var square;
 var edges;
 
 function preload(){
-    music = loadSound("music.mp3");
+    music1 = loadSound("music.mp3");
 }
 
 
@@ -21,51 +21,59 @@ function setup(){
     rect4=createSprite(100,590,260,20);
     rect4.shapeColor=("purple");
     
-    square=createSprite(random(60,450));
+    square=createSprite(random(80,550));
+   
     square.shapeColor=("white");
 square.velocityY=4;
-square.velocityX=4;
+square.velocityX=3;
 
-edges=createEdgeSprites(); 
+
 
 }
 
 function draw() {
     background("orange");
     
+    edges=createEdgeSprites(); 
    
+    square.bounceOff(edges);
     
     
-   //add condition to check if box touching surface and make it box
+    
+          
+      
 
    if(rect1.isTouching(square) && square.bounceOff(rect1)){
-       square.shapeColor=("red");
+       square.shapeColor=("red"); 
        
    }
    
-   if(rect2.isTouching(square) && square.bounceOff(rect2)){
-    square.shapeColor=("blue");
-    music.play();
-}
+   if(square.isTouching(rect2)){
+    square.shapeColor=("blue")
+    music1.stop();
+    square.velocityX=0;
+      square.velocityY=0;}
+   
+
+
 if(rect3.isTouching(square) && square.bounceOff(rect3)){
     square.shapeColor=("green");
+    music1.play();
     
 }
 if(rect4.isTouching(square) && square.bounceOff(rect4)){
     square.shapeColor=("purple");
-    music.play();
+   
 }
 
-if(square.isTouching(rect2)){
-  square.shapeColor=("blue")
-    square.velocityX=0;
-    square.velocityY=0;
-    music.stop();
-}
 
-square.bounceOff(edges); 
+
+ 
+
+
 
 drawSprites();
+
 
 
 }
